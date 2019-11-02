@@ -2,10 +2,12 @@ package study.wyy.security;
 
 import com.spring4all.swagger.EnableSwagger2Doc;
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+@MapperScan("study.wyy.security.mapper")
 @SpringBootApplication
 @EnableSwagger2Doc
 @Slf4j
