@@ -15,7 +15,7 @@ public class SecurityDemoApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SecurityDemoApplication.class, args);
-        log.info("Swagger-UI: http://127.0.0.1:{}/swagger-ui.html",
+        log.info("Swagger-UI: http://127.0.0.1:{}/login.html",
                 context.getEnvironment().getProperty("server.port", "8080"));
     }
 
