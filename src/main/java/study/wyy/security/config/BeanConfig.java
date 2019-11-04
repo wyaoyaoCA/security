@@ -1,10 +1,13 @@
 package study.wyy.security.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import study.wyy.security.service.UserInfoService;
+import study.wyy.security.sms.SmsCodeAuthenticationProvider;
 import study.wyy.security.sms.SmsValidateCodeGenerator;
 import study.wyy.security.validatecode.ImageValidateCodeGenerator;
 import study.wyy.security.validatecode.ValidateCodeGenerator;
@@ -32,4 +35,19 @@ public class BeanConfig {
     public ValidateCodeGenerator smsValidateCodeGenerator(){
         return new SmsValidateCodeGenerator();
     }
+
+    /**
+     * 配置SmsCodeAuthenticationProvider
+     */
+    @Autowired
+    UserInfoService userInfoService;
+
+    @Bean
+    public SmsCodeAuthenticationProvider amsCodeAuthenticationProvider(){
+        SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
+        smsCodeAuthenticationProvider.setUserInfoService(userInfoService);
+        return smsCodeAuthenticationProvider;
+    }
+
+
 }

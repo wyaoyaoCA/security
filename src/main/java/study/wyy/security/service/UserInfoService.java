@@ -1,5 +1,6 @@
 package study.wyy.security.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import study.wyy.security.pojo.UserInfo;
 
 /**
@@ -8,4 +9,6 @@ import study.wyy.security.pojo.UserInfo;
  */
 public interface UserInfoService {
     Long create(UserInfo userInfo);
+
+    UserDetails loadUserByMobile(String principal);
 }

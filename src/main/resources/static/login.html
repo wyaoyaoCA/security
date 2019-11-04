@@ -48,6 +48,7 @@
     <script>
         function getSmsCode() {
             var ajax = new XMLHttpRequest();
+            // 这里默认写死了手机号，正常应该是获取手机号输入框用户输入的手机号
             ajax.open('get','/code/sms?mobile=13012345678');
             ajax.send();
         }
