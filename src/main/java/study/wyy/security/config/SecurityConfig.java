@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import study.wyy.security.web.filter.ImageValidateCodeFilter;
 
 
 /**
@@ -21,6 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     AuthenticationSuccessHandler mySuccessHandler;
     @Autowired
     AuthenticationFailureHandler myFailHandler;
+    @Autowired
+    ImageValidateCodeFilter imageValidateCodeFilter;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -30,9 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  // 配置登录页面不被拦截
                 .antMatchers("/login.html").permitAll()
                 .antMatchers("/auth/login").permitAll()
+                // 配置图片验证码不需要被拦截
+                .antMatchers("/code/image").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
+            //在SpringSecurity过滤器链上加入图片验证码过滤器，放在UsernamePasswordAuthenticationFilter前面
+            .addFilterBefore(imageValidateCodeFilter, UsernamePasswordAuthenticationFilter.class)
             // form表单登录
             .formLogin()
                 // 指定登录页面
@@ -46,9 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(mySuccessHandler)
                 // 配置认证失败处理器
                 .failureHandler(myFailHandler);
-
-
-
 
         http.csrf().disable();
     }
