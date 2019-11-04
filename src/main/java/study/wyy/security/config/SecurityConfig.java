@@ -36,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/login").permitAll()
                 // 配置图片验证码不需要被拦截
                 .antMatchers("/code/image").permitAll()
+                //配置短信验证码不需要被拦截
+                .antMatchers("/code/sms").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

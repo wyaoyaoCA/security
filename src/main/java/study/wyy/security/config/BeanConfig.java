@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import study.wyy.security.sms.SmsValidateCodeGenerator;
 import study.wyy.security.validatecode.ImageValidateCodeGenerator;
 import study.wyy.security.validatecode.ValidateCodeGenerator;
 
@@ -24,5 +25,11 @@ public class BeanConfig {
     @ConditionalOnMissingBean(ImageValidateCodeGenerator.class)
     public ValidateCodeGenerator imageValidateCodeGenerator(){
         return new ImageValidateCodeGenerator();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(SmsValidateCodeGenerator.class)
+    public ValidateCodeGenerator smsValidateCodeGenerator(){
+        return new SmsValidateCodeGenerator();
     }
 }

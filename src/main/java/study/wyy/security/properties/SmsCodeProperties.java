@@ -7,11 +7,8 @@ import lombok.Data;
  * @data 2019-11-04 09:25
  */
 @Data
-public class ImageCodeProperties {
+public class SmsCodeProperties {
 
-    private int width = 67;
-    private int height = 23;
     private int length = 4;
-
-
+    private int expireTime = 60;
 }

@@ -14,4 +14,5 @@ import org.springframework.stereotype.Component;
 public class SecurityProperties {
 
     private ImageCodeProperties imageCode = new ImageCodeProperties();
+    private SmsCodeProperties smsCode = new SmsCodeProperties();
 }

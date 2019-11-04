@@ -23,6 +23,35 @@
             <input type="submit">
         </div>
     </form>
+
+
+    <h3>短信登录</h3>
+    <form action="/authentication/mobile" method="post">
+        <table>
+            <tr>
+                <td>手机号:</td>
+                <td><input type="text" name="mobile" value="13012345678"></td>
+            </tr>
+            <tr>
+                <td>短信验证码:</td>
+                <td>
+                    <input type="text" name="smsCode">
+                    <button onclick="getSmsCode()">获取验证码</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><button type="submit">登录</button></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function getSmsCode() {
+            var ajax = new XMLHttpRequest();
+            ajax.open('get','/code/sms?mobile=13012345678');
+            ajax.send();
+        }
+    </script>
 </div>
 
 </body>

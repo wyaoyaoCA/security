@@ -33,7 +33,7 @@ public class MyFailHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
         log.info("认证失败 cause by {}", exception.getMessage());
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         response.setCharacterEncoding("utf8");
         response.getWriter().write(exception.getMessage());
 
