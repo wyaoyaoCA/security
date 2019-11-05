@@ -1,9 +1,10 @@
 package study.wyy.security.mapper;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import study.wyy.security.pojo.UserInfo;
 import study.wyy.security.pojo.UserInfoExample;
+
+import java.util.List;
 
 public interface UserInfoMapper {
     int countByExample(UserInfoExample example);
@@ -12,7 +13,7 @@ public interface UserInfoMapper {
 
     int deleteByPrimaryKey(Long id);
 
-    Long insert(UserInfo record);
+    int insert(UserInfo record);
 
     int insertSelective(UserInfo record);
 

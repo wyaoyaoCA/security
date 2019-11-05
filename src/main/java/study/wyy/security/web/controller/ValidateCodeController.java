@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author wyaoyao
@@ -44,15 +46,18 @@ public class ValidateCodeController {
     }
 
     @GetMapping("/code/sms")
-    public void smsCode(HttpServletRequest request) throws IOException {
+    public void smsCode(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String mobile = request.getParameterValues("mobile")[0];
         log.info("发送的手机号为：{}",mobile);
         SmsCode code = (SmsCode) smsValidateCodeGenerator.createCode();
+
         log.info("短信验证码为：{}",code.getCode());
         // 将验证码存到session中，后续验证的时候从session中获取
-        request.getSession().setAttribute(SMS_CODE_KEY,code);
+        Map map =  new HashMap<String,SmsCode>();
+        map.put(mobile,code);
+        request.getSession().setAttribute(SMS_CODE_KEY,map);
         // 发送
         defalutSmsSender.send(mobile,code.getCode());
-
+        response.getWriter().write(code.getCode());
     }
 }

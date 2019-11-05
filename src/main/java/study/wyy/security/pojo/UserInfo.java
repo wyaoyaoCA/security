@@ -1,13 +1,11 @@
 package study.wyy.security.pojo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class UserInfo implements UserDetails {
@@ -22,6 +20,8 @@ public class UserInfo implements UserDetails {
     private Date createdAt;
 
     private Date updatedAt;
+
+    private String mobile;
 
     /**
      * 用于封装用户的权限

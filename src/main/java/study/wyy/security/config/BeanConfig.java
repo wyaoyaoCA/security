@@ -36,18 +36,5 @@ public class BeanConfig {
         return new SmsValidateCodeGenerator();
     }
 
-    /**
-     * 配置SmsCodeAuthenticationProvider
-     */
-    @Autowired
-    UserInfoService userInfoService;
-
-    @Bean
-    public SmsCodeAuthenticationProvider amsCodeAuthenticationProvider(){
-        SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
-        smsCodeAuthenticationProvider.setUserInfoService(userInfoService);
-        return smsCodeAuthenticationProvider;
-    }
-
 
 }

@@ -34,7 +34,7 @@ public class MyFailHandler implements AuthenticationFailureHandler {
 
         log.info("认证失败 cause by {}", exception.getMessage());
         response.setContentType("application/json;charset=UTF-8");
-        response.setCharacterEncoding("utf8");
+
         response.getWriter().write(exception.getMessage());
 
     }

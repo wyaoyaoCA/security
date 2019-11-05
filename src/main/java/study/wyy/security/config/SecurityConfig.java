@@ -25,6 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     AuthenticationFailureHandler myFailHandler;
     @Autowired
     ImageValidateCodeFilter imageValidateCodeFilter;
+
+    @Autowired
+    SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -56,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(mySuccessHandler)
                 // 配置认证失败处理器
                 .failureHandler(myFailHandler);
-
+        http.apply(smsCodeAuthenticationSecurityConfig);
         http.csrf().disable();
     }
 }

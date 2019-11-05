@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
  * @modified By：
  * @version: $
  */
-@Component
 @Slf4j
 public class SmsCodeAuthenticationFilter extends
         AbstractAuthenticationProcessingFilter {
@@ -43,6 +42,7 @@ public class SmsCodeAuthenticationFilter extends
         super(new AntPathRequestMatcher("/authentication/mobile", "POST"));
     }
     // 核心逻辑
+    @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         if (postOnly && !request.getMethod().equals("POST")) {
@@ -59,7 +59,7 @@ public class SmsCodeAuthenticationFilter extends
         // 构造SmsCodeAuthenticationToken，注意此时还未认证的构造方法
         SmsCodeAuthenticationToken authRequest = new SmsCodeAuthenticationToken(mobile);
         setDetails(request, authRequest);
-        // 进行认证逻辑
+        // 进行认证逻辑,这里就会通过我们自己实现的SmsCodeAuthenticationProvider进行身份认证
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 

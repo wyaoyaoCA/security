@@ -1,5 +1,6 @@
 package study.wyy.security.handler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -33,9 +34,11 @@ public class MySuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         // 强转成我们的实现
        UserInfo userInfo = (UserInfo) authentication.getPrincipal();
-       log.info("欢迎{}", userInfo.getUsername());
+       log.info("<<<<<<<<<<欢迎>>>>>>>>>>>>>");
         // 这里我们就可以实现我们自己的认证成功逻辑，这里就简单处理一下
-        response.getWriter().write("Login Success");
-
+        //response.getWriter().write("Login Success");
+        response.setContentType("application/json;charset=UTF-8");
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.getWriter().write(objectMapper.writeValueAsString(userInfo));
     }
 }
